@@ -33,7 +33,7 @@ const getUser = async(id) => {
 }
 
 const editUser = async(user) => {
-    const result = await Usr.findByIdAndUpdate(user._id,user,{new:true});
+    const result = await Usr.findByIdAndUpdate(user._id, user, {new:true});
     return result;
 }
 

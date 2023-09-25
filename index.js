@@ -23,34 +23,6 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-/*
-app.get("/", (req, res) => {
-  //res.send("Hola estoy funcionando.");
-  res.status(200).json("Hola estoy funcionando.");
-});
-
-// GET - POST - DELETE - PUT - PATCH 
-
-app.post("/",(req,res) => {
-    res.send("Llamada post");
-});*/
-
-// Get de todos los usuarios
-/*app.get("/users",Middleware.verify,async (req,res) =>{
-
-  let limit = req.query.limit;
-  let offset = req.query.offset;
-
-  try{
-      const results = await UsrController.getAllUsers(limit,offset);
-      res.status(200).json(results);
-
-  }catch(error){
-      res.status(500).send("Error. Intente más tarde.")
-  }
-
-});*/
-
 // Crear usuario
 app.post("/account",async (req,res) =>{
   let name = req.body.name;
@@ -83,7 +55,6 @@ app.get("/account/:id",async (req,res) =>{
 // Modificar usuario
 app.put("/account/:id",async (req,res) =>{
     const user = { _id: req.params.id, ...req.body };
-    //             {_id: req.params.id, name: req.body.name, lastname, email }
     try{
       
       const result = await UsrController.editUser(user);
@@ -111,7 +82,7 @@ app.delete("/account/:id", async(req,res) =>{
     }
 });
 
-//login authentication
+// Autenticación del login
 app.post("/auth/login", async (req,res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -144,7 +115,7 @@ app.post("/dashboard", Middleware.verify, async (req,res) =>{
   }  
 });
 
-//Obtener personaje usuario
+// Obtener personaje usuario
 app.get("/dashboard/:user_id",async (req,res) =>{
   let charactersByUser =  req.params.user_id;
   try{
@@ -156,7 +127,7 @@ app.get("/dashboard/:user_id",async (req,res) =>{
 });
 
 // Obtener todos los personaje mostrando los ultimos creados al principio
-app.get("/dashboard/:limit/:offset", async (req,res) =>{
+app.get("/:limit/:offset", async (req,res) =>{
   let limit = req.query.limit;
   try{
       const results = await ChrController.getAllCharacters();
@@ -168,7 +139,7 @@ app.get("/dashboard/:limit/:offset", async (req,res) =>{
 });
 
 // Modificar personaje
-app.put("/account/:id",async (req,res) =>{
+app.put("/dashboard/:id",async (req,res) =>{
   const user = { _id: req.params.id, ...req.body };
   try{
     const result = await ChrController.editCharacter(user);
@@ -183,7 +154,7 @@ app.put("/account/:id",async (req,res) =>{
 });
 
 // Eliminar personaje
-app.delete("/account/:id", async(req,res) =>{
+app.delete("/dashboard/:id", async(req,res) =>{
   try{
     const result = await ChrController.deleteCharacter(req.params.id);
     if(result){
