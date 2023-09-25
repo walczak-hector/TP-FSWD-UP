@@ -28,13 +28,13 @@ El proyecto se organiza en varios archivos y carpetas de la siguiente manera:
 - **controller.user.js**: Contiene controladores para la creación, obtención, modificación y eliminación de usuarios.
 - **models**: Esta carpeta contiene los esquemas de datos de Mongoose para los usuarios y personajes.
 
-## Controladores
+### Controladores
 Los controladores se encuentran en los archivos **controller.auth.js**, **controller.character.js** y **controller.user.js**, y se utilizan para manejar las operaciones relacionadas con usuarios, personajes y autenticación.
 
-## Middlewares
+### Middlewares
 El middleware de autenticación se encuentra en el archivo **auth-middleware.js** y se utiliza para verificar la autenticidad de las solicitudes de los usuarios.
 
-## Modelos de Datos
+### Modelos de Datos
 Los modelos de datos se definen en los archivos **model.character.js** y **model.user.js** en la carpeta "models". Estos modelos se utilizan para crear las estructuras de datos de los personajes y los usuarios en la base de datos MongoDB.
 
 ## Dependencias
