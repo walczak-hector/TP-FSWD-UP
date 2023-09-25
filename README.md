@@ -192,9 +192,3 @@ Para utilizar este proyecto en tu entorno local, sigue estos pasos:
 Asegúrate de que MongoDB esté en ejecución y configurado correctamente para que la aplicación pueda interactuar con la base de datos.
 
 Ahora deberías tener el proyecto descargado desde GitHub, las dependencias instaladas y la aplicación en funcionamiento en tu entorno local.
-
-
-
-
-
-
