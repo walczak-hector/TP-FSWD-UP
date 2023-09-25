@@ -21,14 +21,13 @@ const addUser = async (email, name, password, isActive) => {
         console.log("usuario nuevo");
         console.log(user);
         return { user }; 
-    }else{
+    } else{
         return false;
     }
 }   
 
 const getUser = async(id) => {
     const user = await Usr.findById(id);
-    // await Usr.findOne({ _id: req.params.id })
     return user;
 }
 

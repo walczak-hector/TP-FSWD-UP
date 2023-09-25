@@ -19,12 +19,11 @@ mongoose
   })
   .catch((err) => console.log("errrorrrrr"+err));
 
-
 app.use(cors());
 app.use(express.json());
 
 // Crear usuario
-app.post("/account",async (req,res) =>{
+app.post("/register", async (req,res) =>{
   let name = req.body.name;
   let email = req.body.email;
   let password = req.body.password;
@@ -33,69 +32,68 @@ app.post("/account",async (req,res) =>{
     const result = await UsrController.addUser(email, name, password, isActive);
     if(result){
       res.status(201).send("Usuario creado correctamente"); // 201
-    }else{
+    } else{
       res.status(409).send("El usuario ya existe"); // 409
-    }  
-  }catch(error){
+    }
+  } catch(error){
     res.status(500).send("Error al crear el usuario.: " + error); //500
-  }  
+  }
 });
 
 // Obtener usuario
-app.get("/account/:id",async (req,res) =>{
-    let userId =  req.params.id;
-    try{
-      user = await UsrController.getUser(userId);
-      res.status(200).json(user);
-    }catch(error){
-      res.status(500).send("Error al obtener al usuario: " + error);
-    }
+app.get("/account/:id", async (req,res) =>{
+  let userId =  req.params.id;
+  try{
+    user = await UsrController.getUser(userId);
+    res.status(200).json(user);
+  } catch(error){
+    res.status(500).send("Error al obtener al usuario: " + error);
+  }
 });
 
 // Modificar usuario
-app.put("/account/:id",async (req,res) =>{
-    const user = { _id: req.params.id, ...req.body };
-    try{
-      
-      const result = await UsrController.editUser(user);
-      if(result){
-        res.status(200).json(result);
-      }else{
-        res.status(404).send("El usuario no existe.");
-      }  
-    }catch(error){  
-       res.status(500).send("Error al modificar el usuario: " + error);
-    } 
+app.put("/account/:id", async (req,res) =>{
+  const user = { _id: req.params.id, ...req.body };
+  try{
+    const result = await UsrController.editUser(user);
+    if(result){
+      res.status(200).json(result);
+    } else{
+      res.status(404).send("El usuario no existe.");
+    }
+  } catch(error){  
+      res.status(500).send("Error al modificar el usuario: " + error);
+  }
 });
 
 // Eliminar usuario
 app.delete("/account/:id", async(req,res) =>{
-    try{
-      const result = await UsrController.deleteUser(req.params.id);
-      if(result){
-        res.status(200).send("Usuario borrado.")
-      }else{
-        res.status(404).send("No se ha podido eliminar el usuario.")
-      }  
-    }catch(error){
-      res.status(500).send("Error al eliminar usario: " + error)
+  try{
+    const result = await UsrController.deleteUser(req.params.id);
+    if(result){
+      res.status(200).send("Usuario borrado.")
+    } else{
+      res.status(404).send("No se ha podido eliminar el usuario.")
     }
+  } catch(error){
+    res.status(500).send("Error al eliminar usario: " + error)
+  }
 });
 
 // Autenticación del login
 app.post("/auth/login", async (req,res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    try{
-      const result = await AuthController.login(email,password);
-      if(result){
-        res.status(200).json(result);
-      }else{
-        res.status(401).send("No puede estar aqui")
-      }
-    }catch(error){
-        res.status(500).send("Error: " + error);
-    }  
+  const email = req.body.email;
+  const password = req.body.password;
+  try{
+    const result = await AuthController.login(email,password);
+    if(result){
+      res.status(200).json(result);
+    } else{
+      res.status(401).send("No puede estar aqui")
+    }
+  } catch(error){
+    res.status(500).send("Error: " + error);
+  }
 })
 
 // Crear personaje
@@ -110,9 +108,9 @@ app.post("/dashboard", Middleware.verify, async (req,res) =>{
     if(result){
       res.status(201).send("Personaje creado correctamente"); // 201
     }
-  }catch(error){
+  } catch(error){
     res.status(500).send("Error al crear el personaje." + error); //500
-  }  
+  }
 });
 
 // Obtener personaje usuario
@@ -121,7 +119,7 @@ app.get("/dashboard/:user_id",async (req,res) =>{
   try{
     const character = await ChrController.getUserCharacters(charactersByUser);
     res.status(200).json(character);
-  }catch(error){
+  } catch(error){
     res.status(500).send("Error al obtener el personaje: " + error);
   }
 });
@@ -130,11 +128,10 @@ app.get("/dashboard/:user_id",async (req,res) =>{
 app.get("/:limit/:offset", async (req,res) =>{
   let limit = req.query.limit;
   try{
-      const results = await ChrController.getAllCharacters();
-      res.status(200).json(results);
-
-  }catch(error){
-      res.status(500).send("Error al obtener los personajes: " + error)
+    const results = await ChrController.getAllCharacters();
+    res.status(200).json(results);
+  } catch(error){
+    res.status(500).send("Error al obtener los personajes: " + error)
   }
 });
 
@@ -145,12 +142,12 @@ app.put("/dashboard/:id",async (req,res) =>{
     const result = await ChrController.editCharacter(user);
     if(result){
       res.status(200).json(result);
-    }else{
+    } else{
       res.status(404).send("El personaje no existe.");
-    }  
-  }catch(error){  
-     res.status(500).send("Error al modificar al personaje: " + error);
-  } 
+    }
+  } catch(error){  
+    res.status(500).send("Error al modificar al personaje: " + error);
+  }
 });
 
 // Eliminar personaje
@@ -159,10 +156,10 @@ app.delete("/dashboard/:id", async(req,res) =>{
     const result = await ChrController.deleteCharacter(req.params.id);
     if(result){
       res.status(200).send("Personaje borrado.")
-    }else{
+    } else{
       res.status(404).send("No se ha podido eliminar el personaje.")
-    }  
-  }catch(error){
+    }
+  } catch(error){
     res.status(500).send("Error al eliminar el personaje: " + error)
   }
 });
