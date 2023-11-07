@@ -5,6 +5,10 @@ const characterSchema = new Schema({
 		type: mongoose.Schema.ObjectId, 
 		ref: "users",
 	},
+	avatar:{
+		type: String,
+		required:true,
+	},
 	upper:{
 		type: String,
 		required:true,

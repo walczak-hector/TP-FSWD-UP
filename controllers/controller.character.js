@@ -1,10 +1,11 @@
 require('mongoose');
 const Pj = require('../models/model.character');
 
-const addCharacter = async (user_id, upper, lower, shoes) => {
+const addCharacter = async (user_id, avatar, upper, lower, shoes) => {
     const pj = new Pj(
         {   
             user_id: user_id,
+            avatar: avatar,
             upper: upper,
             lower: lower,
             shoes:shoes,

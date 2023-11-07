@@ -99,12 +99,13 @@ app.post("/auth/login", async (req,res) => {
 // Crear personaje
 app.post("/dashboard", Middleware.verify, async (req,res) =>{
   let user_id = req.user.userId;
+  let avatar = req.body.avatar;
   let upper = req.body.upper;
   let lower = req.body.lower;
   let shoes = req.body.shoes;
   console.log(user_id);
   try{
-    const result = await ChrController.addCharacter(user_id, upper, lower, shoes);
+    const result = await ChrController.addCharacter(user_id, avatar, upper, lower, shoes);
     if(result){
       res.status(201).send("Personaje creado correctamente"); // 201
     }
