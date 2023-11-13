@@ -16,10 +16,14 @@ const login = async(email,password) => {
             name: result.name,
             email: result.email
         };
-        const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' })
-        return token;
+        const expiresIn = '30s';
+
+        const expirationTime = Math.floor(Date.now() / 1000) + parseInt(expiresIn, 10);
+    
+        const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn })
+        return { token, expirationTime };
     }
-    return null; // retorno 
+    return null;
 }
 
 module.exports = {login}
