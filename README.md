@@ -168,7 +168,7 @@ Para utilizar este proyecto en tu entorno local, sigue estos pasos:
    - Espera a que se complete el proceso de instalación.
 
 3. **Modificar el Archivo `.env.test`**:
-   - En la raíz del proyecto, encuentra el archivo `.env.test`, la cual devera ser renombrada a `.env`.
+   - En la raíz del proyecto, se encuentra el archivo `.env.test`, el cual devera ser renombrado a `.env`.
    - Define el puerto donde deseas que se ejecute la aplicación. Por ejemplo:
      ```
      PORT = 5000.
